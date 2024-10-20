@@ -1,0 +1,62 @@
+﻿<Window x:Class="HttpDemo.Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:HttpDemo.Client"
+        Title="WeatherForecast" 
+        Height="450" Width="800">
+    <Window.DataContext>
+        <local:MainWindowModel/>
+    </Window.DataContext>
+    
+    <DockPanel LastChildFill="True">
+        <StackPanel Orientation="Horizontal"
+                    DockPanel.Dock="Top">
+            <Button Content="Refresh"
+                    Command="{Binding CommandRefresh}"/>
+        </StackPanel>
+        
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            
+            <ListView ItemsSource="{Binding Forecasts}"
+                      SelectedItem="{Binding SelectedForecast}"
+                      Grid.Column="0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Date"
+                                        DisplayMemberBinding="{Binding Date}"/>
+                        <GridViewColumn Header="Summary"
+                                        DisplayMemberBinding="{Binding Summary}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            
+            <StackPanel Grid.Column="1">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Date"/>
+                    <TextBox Text="{Binding Date}"
+                             IsReadOnly="True"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Summary"/>
+                    <TextBox Text="{Binding Summary}"
+                             IsReadOnly="True"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Temperature"/>
+                    
+                    <TextBox Text="{Binding TemperatureC}"
+                             IsReadOnly="True"/>
+                    <TextBlock Text="°C"/>
+                    
+                    <TextBox Text="{Binding TemperatureF}"
+                             IsReadOnly="True"/>
+                    <TextBlock Text="°F"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>
